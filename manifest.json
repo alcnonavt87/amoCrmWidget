@@ -3,11 +3,11 @@
             "name": "widget.name",
             "description": "widget.description",
             "short_description": "widget.short_description",
-            "code": "krekotenko_widget2",
-            "secret_key": "113d000cd5effdc1344b2d67fef291011edc32e6190cbcc0b66e1f065ea3d121",
-            "version": "1.0.0",
-            "interface_version": 1,
-            "init_once": true,
+            "code": "krekotenko_widget9",
+            "secret_key": "65665e2576c6aa33386ff00e2ec6b576e2689b908f174dcc194144e89ff9a3e7",
+            "version": "1.0.27",
+            "interface_version": 2,
+            "init_once": false,
             "locale":[
                     "ru",
                     "en"
@@ -15,17 +15,17 @@
             "installation": true
             },
     "locations":[
-            "lcard-0",
-            "ccard-0",
-            "comcard-0",
-            "settings",
-            "card_sdk"
+            "ccard-1",
+            "clist-0",
+            "lcard-1",
+            "llist-0",
+            "settings"
             ],
     "settings":{
-            "login":{
-                    "name": "settings.login",
-                    "type": "text",
-                    "required": true
-            }
+                "login":{
+                        "name": "settings.login",
+                        "type": "text",
+                        "required": true
+                        }
             }
 }
