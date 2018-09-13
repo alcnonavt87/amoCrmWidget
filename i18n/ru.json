@@ -1,10 +1,11 @@
 {
     "widget":{
-        "name":"Пример виджета SDK2",
+        "name":"Виджет",
         "short_description":"Короткое описание виджета2",
         "description":"Полное описание виджета2"
     },
     "settings":{
         "login":"Логин"
-    }
+    },
+    "purchases": "Покупки"
 }

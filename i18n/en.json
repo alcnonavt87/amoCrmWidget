@@ -1,10 +1,11 @@
 {
     "widget":{
-        "name":"SDK Example Widget2",
+        "name":"Widget",
         "short_description":"Short description2",
         "description":"Full description2"
     },
     "settings":{
         "login":"User login"
-    }
+    },
+    "purchases": "Purchases"
 }

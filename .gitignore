@@ -1,0 +1,8 @@
+.idea
+config.php
+.htaccess
+uploads
+dommino.ua
+roistat/test.php
+/node_modules/*
+admin/config.php

@@ -1,18 +1,27 @@
 define(['jquery', 'lib/components/base/modal'], function ($, Modal) {
     var CustomWidget = function () {
-        var self = this,
-        system = self.system;
-        self.sendInfo = function () {
+        var self = this;
+        this.sendData = function (data) {
+            $(".message-result.message-error").remove();
+            $(".message-result.message-success").remove();
+            console.log(data);
             self.crm_post(
-					console.log("Send post"),
-                'https://8d454a97.ngrok.io/frondevo.loc/index.php',
+                'http://d2984bac.ngrok.io/',
                 {
-                    name: 'test',
-                    phones: 2,
-                    emails: 3
+                    data
                 },
                 function (msg) {
-					console.log(msg);
+                    if (msg['error']) {
+                        var error = '';
+                        $.each((msg['error']), function (key, value) {
+                            error += '<div class="message-result message-error">' + value + '</div>'
+                        });
+                        $(error).insertAfter(".form-control.center-inner");
+                    } else if (msg['success']) {
+                        $('<div class="message-result message-success">' + msg['success'] + '</div>').insertAfter(".form-control.center-inner");
+                    } else {
+                        console.log(msg)
+                    }
                 },
                 'json'
             );
@@ -31,7 +40,6 @@ define(['jquery', 'lib/components/base/modal'], function ($, Modal) {
                 destroy: function () {
                 }
             });
-
         };
         this.callbacks = {
             settings: function () {
@@ -43,11 +51,31 @@ define(['jquery', 'lib/components/base/modal'], function ($, Modal) {
             },
             bind_actions: function () {
                 $('.ac-form-button').on('click', function () {
-                    self.renderModal('<label for="price"></label><input id="price" name="price" type="text"><input id="cardId" name="cardId" type="hidden"><label for="date"></label><input id="date" name="date" type="date"><input type="button" id="send" value="Отправить">');
+                    self.renderModal('<div class="card-modal"><form name="cardPrice" action="">' +
+                        '<div class="form-control right-inner">' +
+                        '<label class="form-label" for="price">Сумма:</label>' +
+                        '<input class="form-input" id="price" name="price" type="text">' +
+                        '</div>' +
+                        '<div class="form-control right-inner">' +
+                        '<label class="form-label" for="date">Дата покупки:</label>' +
+                        '<input class="form-input" id="date" name="date" type="date">' +
+                        '</div>' +
+                        '<div class="form-control center-inner">' +
+                        '<input class="form-button" type="button" id="send_modal" value="Отправить">' +
+                        '</div>' +
+                        '</form></div>');
                 });
-				$('body').on('click', '#send', function () {
-					self.sendInfo();
-				});
+                $("body").off("click", "#send_modal", createData);
+                $('body').on('click', '#send_modal', createData);
+
+                function createData() {
+                    var data = {};
+                    $.each($('form[name="cardPrice"]').serializeArray(), function (_, item) {
+                        data[item.name] = item.value;
+                    });
+                    data['amoCardId'] = $("input[name='lead[ID]']").val();
+                    self.sendData(data);
+                }
                 return true;
             },
             render: function () {
